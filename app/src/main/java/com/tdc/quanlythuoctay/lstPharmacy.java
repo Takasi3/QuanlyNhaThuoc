@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class lstPharmacy extends AppCompatActivity {
+public class lstPharmacy extends MainActivity {
     private ListView lstMnt,lstTenNT,lstDiaChi;
 
     @Override

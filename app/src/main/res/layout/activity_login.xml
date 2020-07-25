@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorLogin"
+    android:background="@color/colorLoading"
     tools:context=".Login">
 
     <LinearLayout
@@ -96,12 +96,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:background="@drawable/backgroudbtn"
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
+            android:textStyle="bold"
+            android:textSize="9pt"
             android:text="@string/login"/>
 
         <LinearLayout

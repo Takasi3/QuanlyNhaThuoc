@@ -11,12 +11,9 @@
         <activity android:name=".lstPharmacy"></activity>
         <activity android:name=".Menu" />
         <activity android:name=".Login" />
-        <activity
-            android:name=".splashscreen"
-            android:theme="@style/SplashTheme">
+        <activity android:name=".splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
