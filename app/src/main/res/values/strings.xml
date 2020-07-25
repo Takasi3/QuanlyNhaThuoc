@@ -4,4 +4,7 @@
     <string name="pass">Mật Khẩu</string>
     <string name="login">Đăng Nhập</string>
     <string name="savepass">Ghi nhớ mật khẩu</string>
+    <string name="name" translatable="false">Pharmacity</string>
+    <string name="bxh" translatable="false">Bảng Xếp Hạng Tuần</string>
+    <string name="blstPharma" translatable="false">Danh Sách Nhà Thuốc</string>
 </resources>
