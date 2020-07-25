@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QuanLyThuocTay</string>
+    <string name="user">Tên Đăng Nhập</string>
+    <string name="pass">Mật Khẩu</string>
+    <string name="login">Đăng Nhập</string>
+    <string name="savepass">Ghi nhớ mật khẩu</string>
+</resources>
