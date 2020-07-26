@@ -10,5 +10,8 @@
     <string name="qlhd" translatable="false">Hóa Đơn</string>
     <string name="bxh" translatable="false">Bảng Xếp Hạng Tuần</string>
     <string name="blstPharma" translatable="false">Danh Sách Nhà Thuốc</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="content" translatable="false">
+        Quản Lý Thuốc Tây <u>NHÓM : 6</u>
+    </string>
+    <string name="title_activity_maps" translatable="false">Map</string>
 </resources>

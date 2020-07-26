@@ -1,7 +1,9 @@
 package com.tdc.quanlythuoctay.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 
 public class Login extends MainActivity {
     private Spinner spinerLanguage;
-    private Button btnLogin;
+    private Button btnLogin,btndisplaying;
     private CheckBox cbSavePass;
     private EditText edtUser, edtPass;
 
@@ -32,6 +34,7 @@ public class Login extends MainActivity {
 
         spinerLanguage = (Spinner) findViewById(R.id.spinerLanguage);
         btnLogin = (Button) findViewById(R.id.btn_login);
+        btndisplaying = (Button) findViewById(R.id.displaying);
         edtUser = (EditText) findViewById(R.id.input_email);
         edtPass = (EditText) findViewById(R.id.input_password);
         cbSavePass= (CheckBox) findViewById(R.id.cbSavePass);
@@ -50,6 +53,18 @@ public class Login extends MainActivity {
             @Override
             public void onClick(View view) {
                 Login();
+            }
+        });
+        btndisplaying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater li = LayoutInflater.from(Login.this);
+                View promptsView = li.inflate(R.layout.popupcontent, null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        Login.this);
+                alertDialogBuilder.setView(promptsView);
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
 
@@ -91,8 +106,8 @@ public class Login extends MainActivity {
     }
     private boolean check(String user ,String Pass) {
         Boolean result = false;
-        if (user.toUpperCase().equals("nhom6")) {
-            if (Pass.toUpperCase().equals("nhom6")) {
+        if (user.toUpperCase().equals("NHOM6")) {
+            if (Pass.toUpperCase().equals("NHOM6")) {
                 result = true;
             }
         } else if (user.equals("12345")) {

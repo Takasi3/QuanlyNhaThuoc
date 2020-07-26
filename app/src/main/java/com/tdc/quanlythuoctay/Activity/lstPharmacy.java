@@ -77,7 +77,7 @@ public class lstPharmacy extends MainActivity {
             public void onClick(View view) {
                 startActivity(new Intent(lstPharmacy.this, MapsActivity.class));
                 // close  activity
-                finish();
+       
             }
         });
         btndelete.setOnClickListener(new View.OnClickListener() {
