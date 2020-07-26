@@ -1,11 +1,7 @@
-package com.tdc.quanlythuoctay;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.tdc.quanlythuoctay.Activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,11 +10,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.tdc.quanlythuoctay.R;
+import com.tdc.quanlythuoctay.model.AccoutModel;
+
 import java.util.ArrayList;
 
 public class Login extends MainActivity {
-    private static SharedPreferences sharedPreferences;
-    private static SharedPreferences.Editor editor;
     private Spinner spinerLanguage;
     private Button btnLogin;
     private CheckBox cbSavePass;
@@ -38,7 +35,6 @@ public class Login extends MainActivity {
         edtUser = (EditText) findViewById(R.id.input_email);
         edtPass = (EditText) findViewById(R.id.input_password);
         cbSavePass= (CheckBox) findViewById(R.id.cbSavePass);
-        initPreferences(); // Khai báo biến lưu giữ liệu
         checkdata();// kiểm tra xem có thông tin đăng nhập sẵn không ?
 
         ArrayList<String> arrayList = new ArrayList<>();
@@ -71,15 +67,15 @@ public class Login extends MainActivity {
                 if(cbSavePass.isChecked()) // nếu có check lưu mật khẩu
                 {
                     // Lưu lại thông tin đăng nhập xuống máy
-                    editor.putString("user",edtUser.getText().toString());
-                    editor.putString("pass",edtPass.getText().toString());
-                    editor.commit();
+                    AccoutModel accoutModel= new AccoutModel();
+                    accoutModel.setUser(edtUser.getText().toString());
+                    accoutModel.setPass(edtPass.getText().toString());
+                    setDefaults(accoutModel,getApplicationContext());
                 }
                 else
                 {
                     // nếu không thì xoá dữ liệu cũ
-                    editor.clear();
-                    editor.commit();
+                    removeDefaults(getApplicationContext());
                 }
                 startActivity(new Intent(Login.this, Menu.class));
                 // close splash activity
@@ -95,8 +91,8 @@ public class Login extends MainActivity {
     }
     private boolean check(String user ,String Pass) {
         Boolean result = false;
-        if (user.toUpperCase().equals("TAKASI3")) {
-            if (Pass.equals("301097")) {
+        if (user.toUpperCase().equals("nhom6")) {
+            if (Pass.equals("nhom6")) {
                 result = true;
             }
         } else if (user.equals("12345")) {
@@ -111,20 +107,15 @@ public class Login extends MainActivity {
         return  result;
 
     }
-    public void initPreferences() {
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = sharedPreferences.edit();
-    }
     private void checkdata(){
-        if(!sharedPreferences.getString("user", "null").equals("null"))// kiểm tra nếu dữ liệu 'user' khác null
+        if(getDefaults("User",getApplicationContext()) != null )// kiểm tra nếu dữ liệu 'user' khác null
         {
                 //set giá trị thông tin đăng nhập vào 2 editbox
-            String user = sharedPreferences.getString("user", "");
-            String pass = sharedPreferences.getString("pass", "");
+            String user = getDefaults("User",getApplicationContext());
+            String pass = getDefaults("Pass",getApplicationContext());
             edtUser.setText(user);
             edtPass.setText(pass);
-
 
         }
     }

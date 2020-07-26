@@ -4,142 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorLoading"
     android:orientation="vertical"
-    tools:context=".lstPharmacy">
+    android:padding="10dp"
+    tools:context=".Activity.Menu">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_weight="0.7"
+        android:gravity="top"
+        android:orientation="horizontal"
         >
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/ic_baseline_arrow_back_24">
+
+        </Button>
         <TextView
+            android:gravity="center"
+            android:layout_weight="10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15pt"
-            android:textStyle="italic"
+            android:textStyle="bold"
             android:textColor="@color/Black"
-            android:text="@string/blstPharma">
+            android:textSize="10pt"
+            android:text="@string/qlnt">
 
         </TextView>
 
+
+
+
     </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:padding="5dp"
+            android:background="@drawable/rounded_corner"
+            android:layout_weight="6">
+
+            <ListView
+                android:id="@+id/lstNT"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10dp"
+                >
+            </ListView>
+
+        </ScrollView>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
-        android:orientation="vertical"
-        >
+        android:layout_weight="2"
+        android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            >
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/Black"
-                    android:text="Mã Nhà Thuôc"
-                    >
-                </TextView>
-                <ListView
-                    android:id="@+id/lvMnt"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </ListView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tên Nhà Thuôc"
-                    android:textColor="@color/Black"
-                    >
-                </TextView>
-                <ListView
-                    android:id="@+id/lvTennt"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </ListView>
-            </LinearLayout>
-            <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical"
+            android:padding="10dp"
             android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Địa Chỉ"
-                android:textColor="@color/Black"
-                >
-            </TextView>
-            <ListView
-                android:id="@+id/lvdiachi"
-                android:layout_marginTop="10dp"
+            <Button
+                android:background="@drawable/backgroudbtnadd"
+                android:id="@+id/btnadd"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ListView>
-        </LinearLayout>
-
-        </LinearLayout>
-
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+                android:layout_height="0dp"
+                android:textColor="@color/white"
+                android:text="Thêm Mới"
+                android:layout_weight="1"></Button>
             <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ADD"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/backgroudbtnedit"
+                android:id="@+id/btnedit"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:textColor="@color/white"
+                android:text="Sửa"
+                android:layout_weight="1"></Button>
+            <Button
+                android:layout_marginTop="5dp"
+                android:background="@drawable/backgroudbtndelete"
+                android:id="@+id/btndelete"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:textColor="@color/white"
+                android:text="Xoá"
+                android:layout_weight="1"></Button>
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnMap"
+            android:background="@drawable/map"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            >
-        </Button>
-            <Button
-                android:id="@+id/btnEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                android:layout_weight="1"
-                >
-            </Button>
-            <Button
-                android:id="@+id/btnDel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Del"
-                android:layout_weight="1"
-                >
-            </Button>
+            ></ImageButton>
 
-        </LinearLayout>
 
     </LinearLayout>
 

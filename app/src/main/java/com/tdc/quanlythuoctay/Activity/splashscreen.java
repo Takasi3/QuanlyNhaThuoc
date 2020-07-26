@@ -1,14 +1,18 @@
-package com.tdc.quanlythuoctay;
+package com.tdc.quanlythuoctay.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.graphics.Matrix;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.tdc.quanlythuoctay.R;
 
 public class splashscreen extends MainActivity {
     private ImageView mImageView;
@@ -19,7 +23,6 @@ public class splashscreen extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
         mImageView = (ImageView) findViewById(R.id.image2);
-
         startAnimation();
     }
 
@@ -42,7 +45,7 @@ public class splashscreen extends MainActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    waited += 100;  // + thêm 100 cho biến thread
+                    waited += 100;  // + thêm 100 cho biến waited
                 }
                 // sau 35 lần chạy trong vòng lặp thì thoát : tổng cộng 3500 milisecon = 3.5 giây
                 splashscreen.this.finish(); // Kết thúc màn hình loading
