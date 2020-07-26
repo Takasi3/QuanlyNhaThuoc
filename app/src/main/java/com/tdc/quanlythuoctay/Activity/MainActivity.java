@@ -9,14 +9,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
-
+import	android.se.omapi.Session;
 import com.tdc.quanlythuoctay.R;
 import com.tdc.quanlythuoctay.model.AccoutModel;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
+    private static String ID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("User", accout.getUser());
             editor.putString("Pass", accout.getPass());
             editor.commit();
+    }
+    // ham lưu ngôn ngữ
+    public static void setLanguage(String language, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("language", language);
+        editor.commit();
     }
 
     //Hàm lấy thông tin từ máy
@@ -71,4 +84,12 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+    public String getID() {
+        return ID;
+    }
+    public void setID(String someVariable) {
+        this.ID = someVariable;
+    }
+
+
 }

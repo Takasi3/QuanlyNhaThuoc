@@ -74,6 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_email"
                 android:layout_width="match_parent"
@@ -87,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:hintTextAppearance="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_password"
                 android:layout_width="match_parent"
@@ -117,6 +119,7 @@
             <CheckBox
                 android:id="@+id/cbSavePass"
                 android:checked="true"
+                android:buttonTint="@color/colorCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

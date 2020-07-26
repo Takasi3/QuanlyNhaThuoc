@@ -72,14 +72,14 @@ public class lstPharmacy extends MainActivity {
                 finish();
             }
         });
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(lstPharmacy.this, MapsActivity.class));
-                // close  activity
-       
-            }
-        });
+//        btnMap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(lstPharmacy.this, MapsActivity.class));
+//                // close  activity
+//
+//            }
+//        });
         btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

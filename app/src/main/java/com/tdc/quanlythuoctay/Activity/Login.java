@@ -1,10 +1,14 @@
 package com.tdc.quanlythuoctay.Activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,6 +20,7 @@ import com.tdc.quanlythuoctay.R;
 import com.tdc.quanlythuoctay.model.AccoutModel;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Login extends MainActivity {
     private Spinner spinerLanguage;
@@ -27,7 +32,18 @@ public class Login extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getDefaults("language",getApplicationContext()) != null )// kiểm tra nếu dữ liệu 'user' khác null
+        {
+            Locale locale = new Locale(getDefaults("language",getApplicationContext()));
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config,
+            getBaseContext().getResources().getDisplayMetrics());
+        }
         setContentView(R.layout.activity_login);
+
+
 
 
         // Ánh xạ
@@ -41,8 +57,10 @@ public class Login extends MainActivity {
         checkdata();// kiểm tra xem có thông tin đăng nhập sẵn không ?
 
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("Tiếng Việt");
-        arrayList.add("English");
+        arrayList.add(getString(R.string.chonnn));
+        arrayList.add( getString(R.string.tv));
+        arrayList.add(getString(R.string.ta));
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -67,13 +85,42 @@ public class Login extends MainActivity {
                 alertDialog.show();
             }
         });
+        spinerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(position == 1)
+                {
+                    setLanguage("vi-rVN",getApplicationContext());
+                    Toast.makeText(Login.this,getString(R.string.changeNN),Toast.LENGTH_LONG).show();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+
+                }
+                else if(position == 2)
+                {
+                    setLanguage("en",getApplicationContext());
+                    Toast.makeText(Login.this,getString(R.string.changeNN),Toast.LENGTH_LONG).show();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                    spinerLanguage.setSelection(0);
+            }
+
+        });
 
     }
     private void Login()
     {
         if(edtUser.getText().length() == 0  ||edtPass.getText().length() == 0 )
         {
-            Toast.makeText(Login.this,"Vui Lòng nhập đầy đủ tài khoản và mật khẩu !",Toast.LENGTH_LONG).show();
+            Toast.makeText(Login.this,getString(R.string.error1),Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -92,14 +139,16 @@ public class Login extends MainActivity {
                     // nếu không thì xoá dữ liệu cũ
                     removeDefaults(getApplicationContext());
                 }
-                startActivity(new Intent(Login.this, Menu.class));
+                Intent login = new Intent(Login.this, Menu.class);
+                login.putExtra("ID",edtUser.getText().toString());
+                startActivity(login);
                 // close splash activity
                 finish();
 
             }
             else
             {
-                Toast.makeText(Login.this,"Taì khoản hoặc mật khẩu không chính xác !",Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this,getString(R.string.error2),Toast.LENGTH_LONG).show();
             }
 
         }
@@ -134,4 +183,6 @@ public class Login extends MainActivity {
 
         }
     }
+
+
 }

@@ -51,9 +51,38 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:src="@drawable/pharmacy"
-            android:layout_weight="5"
+            android:layout_weight="8"
             >
         </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingLeft="30dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10pt"
+                android:textColor="@color/Black"
+                android:text="ID :"
+                android:textStyle="bold"
+                >
+
+            </TextView>
+            <TextView
+                android:layout_marginLeft="10pt"
+                android:id="@+id/tvID"
+                android:textSize="10pt"
+                android:text="ID"
+                android:textColor="@color/colorID"
+                android:textStyle="bold"
+                android:textAlignment="viewStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+
 
 
 
@@ -66,7 +95,6 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="30dp"
-        android:layout_marginTop="5dp"
         >
         <Button
             android:id="@+id/btnQLNT"
