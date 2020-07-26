@@ -92,7 +92,7 @@ public class Login extends MainActivity {
     private boolean check(String user ,String Pass) {
         Boolean result = false;
         if (user.toUpperCase().equals("nhom6")) {
-            if (Pass.equals("nhom6")) {
+            if (Pass.toUpperCase().equals("nhom6")) {
                 result = true;
             }
         } else if (user.equals("12345")) {

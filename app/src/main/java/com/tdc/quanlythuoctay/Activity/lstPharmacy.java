@@ -191,10 +191,14 @@ public class lstPharmacy extends MainActivity {
                         .findViewById(R.id.btnpopupadd);
                 final Button btnCancel = (Button) promptsView
                         .findViewById(R.id.btnpopupcancel);
-
+                final Button btnEDIT = (Button) promptsView
+                        .findViewById(R.id.btnpopupedit);
+                btnEDIT.setVisibility(View.GONE);
+                btnADD.setVisibility(View.VISIBLE);
                 final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialogBuilder
                         .setCancelable(false);
+
                 btnADD.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -209,7 +213,7 @@ public class lstPharmacy extends MainActivity {
 
                     }
                 });
-                edtDiaChi.setVisibility(View.GONE);
+
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
