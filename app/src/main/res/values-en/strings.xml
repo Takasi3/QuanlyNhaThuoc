@@ -17,9 +17,12 @@
     <string name="chonnn">Select Language</string>
     <string name="error1">Please enter your full account and password!</string>
     <string name="error2">The account or password is incorrect!</string>
-    <string name = "changeNN">Chuyển ngôn ngữ thành công !</string>
     <string name="btnADD">ADD NEW</string>
     <string name="btnEDIT">EDIT</string>
     <string name="btnDelete">DELETE</string>
     <string name="btnCancel">CANCEL</string>
+    <string name="changeNN">Transfer language successfully!</string>
+    <string name="ifnot">If not yet,CREATE ACCOUNT</string>
+    <string name="register">Register</string>
+    <string name="repass">Retype Password</string>
 </resources>

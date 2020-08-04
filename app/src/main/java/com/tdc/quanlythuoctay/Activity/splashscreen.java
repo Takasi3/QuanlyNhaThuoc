@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,9 +28,15 @@ public class splashscreen extends MainActivity {
     }
 
     private void startAnimation() {
-        Animation rotate = AnimationUtils.loadAnimation(this,  R.anim.rotate);
+        //Animation rotate = AnimationUtils.loadAnimation(this,  R.anim.rotate);
+        RotateAnimation rotate = new RotateAnimation(0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
 
-        rotate.reset();
+        rotate.setDuration(300);
+        rotate.setRepeatCount(-1);
+
+        mImageView.setAnimation(rotate);
 
 
         mImageView.setAnimation(rotate);

@@ -109,29 +109,56 @@
             android:textColor="@color/white"
             android:textSize="9pt"
             android:text="@string/login"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
             >
-            <CheckBox
-                android:id="@+id/cbSavePass"
-                android:checked="true"
-                android:buttonTint="@color/colorCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </CheckBox>
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/savepass"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
                 >
-            </TextView>
+                <CheckBox
+                    android:id="@+id/cbSavePass"
+                    android:checked="true"
+                    android:buttonTint="@color/colorCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
+                </CheckBox>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/savepass"
+                    >
+                </TextView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
+                >
+                <TextView
+                    android:id="@+id/createAccout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorID"
+                    android:text="@string/ifnot"
+                    >
+                </TextView>
+
+
+            </LinearLayout>
         </LinearLayout>
+
+
 
     </LinearLayout>
     <LinearLayout

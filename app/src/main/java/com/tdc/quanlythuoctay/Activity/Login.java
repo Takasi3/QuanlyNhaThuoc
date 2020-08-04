@@ -14,10 +14,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tdc.quanlythuoctay.R;
 import com.tdc.quanlythuoctay.model.AccoutModel;
+import com.tdc.quanlythuoctay.model.CustomAdapter;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -26,8 +28,10 @@ public class Login extends MainActivity {
     private Spinner spinerLanguage;
     private Button btnLogin,btndisplaying;
     private CheckBox cbSavePass;
+    private TextView createAccout;
     private EditText edtUser, edtPass;
-
+    String[] countryNames={"Chọn Ngôn Ngữ","Việt Nam","English"};
+    int flags[] = {R.drawable.vietnam,R.drawable.vietnam, R.drawable.english};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +58,12 @@ public class Login extends MainActivity {
         edtUser = (EditText) findViewById(R.id.input_email);
         edtPass = (EditText) findViewById(R.id.input_password);
         cbSavePass= (CheckBox) findViewById(R.id.cbSavePass);
+        createAccout=(TextView) findViewById(R.id.createAccout);
         checkdata();// kiểm tra xem có thông tin đăng nhập sẵn không ?
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add(getString(R.string.chonnn));
-        arrayList.add( getString(R.string.tv));
-        arrayList.add(getString(R.string.ta));
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                arrayList );
-        spinerLanguage.setAdapter(arrayAdapter);
+        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),flags,countryNames);
+        spinerLanguage.setAdapter(customAdapter);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +81,15 @@ public class Login extends MainActivity {
                 alertDialogBuilder.setView(promptsView);
                 final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
+            }
+        });
+        createAccout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent AcountIntent = new Intent(Login.this, Account.class);
+                startActivity(AcountIntent);
+                // close splash activity
+                finish();
             }
         });
         spinerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

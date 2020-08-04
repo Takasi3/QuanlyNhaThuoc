@@ -22,4 +22,11 @@
         android:layout_marginTop="200dp"
         android:src="@drawable/iconloading">
     </ImageView>
+
+    <ImageView
+        android:id="@+id/image3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     >
+    </ImageView>
 </LinearLayout>
