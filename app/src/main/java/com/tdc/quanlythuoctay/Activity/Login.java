@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tdc.quanlythuoctay.Database.DatabaseHandler;
 import com.tdc.quanlythuoctay.R;
 import com.tdc.quanlythuoctay.model.AccoutModel;
 import com.tdc.quanlythuoctay.model.CustomAdapter;
@@ -30,6 +31,7 @@ public class Login extends MainActivity {
     private CheckBox cbSavePass;
     private TextView createAccout;
     private EditText edtUser, edtPass;
+    DatabaseHandler db;
     String[] countryNames={"Chọn Ngôn Ngữ","Việt Nam","English"};
     int flags[] = {R.drawable.vietnam,R.drawable.vietnam, R.drawable.english};
 
@@ -48,7 +50,7 @@ public class Login extends MainActivity {
         setContentView(R.layout.activity_login);
 
 
-
+        db = new DatabaseHandler(Login.this);
 
         // Ánh xạ
 
@@ -131,14 +133,13 @@ public class Login extends MainActivity {
         }
         else
         {
-            if(check(edtUser.getText().toString().trim(),edtPass.getText().toString().trim()))
+            AccoutModel accoutModel= new AccoutModel();
+            accoutModel = db.Login(edtUser.getText().toString().trim(),edtPass.getText().toString().trim());
+            if(accoutModel != null)
             {
                 if(cbSavePass.isChecked()) // nếu có check lưu mật khẩu
                 {
                     // Lưu lại thông tin đăng nhập xuống máy
-                    AccoutModel accoutModel= new AccoutModel();
-                    accoutModel.setUser(edtUser.getText().toString());
-                    accoutModel.setPass(edtPass.getText().toString());
                     setDefaults(accoutModel,getApplicationContext());
                 }
                 else
@@ -149,9 +150,7 @@ public class Login extends MainActivity {
                 Intent login = new Intent(Login.this, Menu.class);
                 login.putExtra("ID",edtUser.getText().toString());
                 startActivity(login);
-                // close splash activity
                 finish();
-
             }
             else
             {
@@ -160,34 +159,16 @@ public class Login extends MainActivity {
 
         }
     }
-    private boolean check(String user ,String Pass) {
-        Boolean result = false;
-        if (user.toUpperCase().equals("NHOM6")) {
-            if (Pass.toUpperCase().equals("NHOM6")) {
-                result = true;
-            }
-        } else if (user.equals("12345")) {
-            if (Pass.equals("12345")) {
-                result =  true;
-            }
-        }
-        else
-        {
-            result = false;
-        }
-        return  result;
 
-    }
 
     private void checkdata(){
         if(getDefaults("User",getApplicationContext()) != null )// kiểm tra nếu dữ liệu 'user' khác null
         {
-                //set giá trị thông tin đăng nhập vào 2 editbox
+            //set giá trị thông tin đăng nhập vào 2 editbox
             String user = getDefaults("User",getApplicationContext());
             String pass = getDefaults("Pass",getApplicationContext());
             edtUser.setText(user);
             edtPass.setText(pass);
-
         }
     }
 

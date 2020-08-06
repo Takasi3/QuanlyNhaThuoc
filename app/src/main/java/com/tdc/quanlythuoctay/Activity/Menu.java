@@ -1,18 +1,26 @@
 package com.tdc.quanlythuoctay.Activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tdc.quanlythuoctay.R;
+import com.tdc.quanlythuoctay.model.AccoutModel;
+
+import java.io.File;
 
 
 public class Menu extends MainActivity {
 private Button btnLogout,btnQLNT,btnQLT,btnHD;
 private TextView tvID;
+private ImageView imgAvatar;
+    private AccoutModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,17 +32,17 @@ private TextView tvID;
         btnQLT =(Button)  findViewById(R.id.btnQLT);
         btnHD = (Button) findViewById(R.id.btnHD);
         tvID = (TextView) findViewById(R.id.tvID);
-       Bundle extras = getIntent().getExtras();
-         if (extras != null) {
-              String idtext = getIntent().getExtras().getString("ID");
-             tvID.setText(idtext);
-             setID(idtext);
-         }
-         else
-         {
-             tvID.setText(getID());
-         }
-
+        imgAvatar = (ImageView) findViewById(R.id.imgAvatar);
+        userModel = getUser(Menu.this);
+        if(userModel.getAvatar().toUpperCase()!= "LUULINH")
+        {
+            tvID.setText(userModel.getUser());
+            File imgFile = new  File(userModel.getAvatar());
+                 if(imgFile.exists()){
+                     Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                     imgAvatar.setImageBitmap(myBitmap);
+                 }
+        }
         setEvent();
     }
 

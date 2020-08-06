@@ -21,7 +21,6 @@ import com.tdc.quanlythuoctay.model.AccoutModel;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static String ID;
 
 
     @Override
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
             editor.putString("User", accout.getUser());
             editor.putString("Pass", accout.getPass());
+            editor.putString("Avatar", accout.getAvatar());
             editor.commit();
     }
     // ham lưu ngôn ngữ
@@ -60,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
         editor.clear();
         editor.commit();
     }
+    public static AccoutModel getUser(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        AccoutModel user = new AccoutModel();
+        user.setUser(preferences.getString("User",null));
+        user.setPass(preferences.getString("Pass",null));
+        user.setAvatar(preferences.getString("Avatar","LUULINH"));
+        return user;
+    }
+
     @Override
     public void onBackPressed() {
         xulythoat();
@@ -84,12 +93,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-    public String getID() {
-        return ID;
-    }
-    public void setID(String someVariable) {
-        this.ID = someVariable;
-    }
+
 
 
 }
