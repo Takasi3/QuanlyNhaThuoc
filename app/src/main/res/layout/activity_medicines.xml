@@ -36,6 +36,15 @@
             android:text="@string/qlt">
 
         </TextView>
+        <Button
+            android:id="@+id/btnReload"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:background="@drawable/ic_baseline_refresh_24">
+
+        </Button>
 
 
 
@@ -49,12 +58,13 @@
         android:gravity="top">
 
         <EditText
+            android:id="@+id/edtSearch"
             android:background="@drawable/backgroudbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10pt"
+            android:textSize="8pt"
             android:textAlignment="center"
-            android:hint="Tìm Kiếm" />
+            android:hint="Tìm theo mã hoặc tên thuốc" />
 
         <Button
             android:id="@+id/btnseach"

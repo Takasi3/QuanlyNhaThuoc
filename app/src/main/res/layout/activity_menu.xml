@@ -71,7 +71,7 @@
                 android:id="@+id/tvID"
                 android:textSize="10pt"
                 android:text="ID"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:textColor="@color/colorID"
                 android:textStyle="bold"
                 android:layout_width="0dp"

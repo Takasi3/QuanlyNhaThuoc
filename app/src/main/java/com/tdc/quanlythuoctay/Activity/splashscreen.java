@@ -30,10 +30,10 @@ public class splashscreen extends MainActivity {
     private void startAnimation() {
         //Animation rotate = AnimationUtils.loadAnimation(this,  R.anim.rotate);
         RotateAnimation rotate = new RotateAnimation(0, 360,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                Animation.RESTART, 0.5f, Animation.RELATIVE_TO_SELF,
                 0.5f);
 
-        rotate.setDuration(300);
+        rotate.setDuration(200);
         rotate.setRepeatCount(-1);
 
         mImageView.setAnimation(rotate);

@@ -1,26 +1,47 @@
 package com.tdc.quanlythuoctay.model;
 
 public class MedicinesModel {
+    private int idthuoc;
     private String maThuoc;
+
+    @Override
+    public String toString() {
+        return  tenThuoc;
+    }
+
     private String tenThuoc;
     private String donGia;
     private String donVi;
     private boolean chon;
 
-    public MedicinesModel(String maThuoc, String tenThuoc, String donGia, String donVi, boolean chon) {
+    public MedicinesModel(int idthuoc, String maThuoc, String tenThuoc, String donGia, String donVi) {
+        this.idthuoc = idthuoc;
         this.maThuoc = maThuoc;
         this.tenThuoc = tenThuoc;
         this.donGia = donGia;
         this.donVi = donVi;
-        this.chon = chon;
+    }
+
+    public MedicinesModel(String maThuoc, String tenThuoc, String donGia, String donVi) {
+        this.maThuoc = maThuoc;
+        this.tenThuoc = tenThuoc;
+        this.donGia = donGia;
+        this.donVi = donVi;
     }
 
     public MedicinesModel() {
 
     }
 
+    public int getIdthuoc() {
+        return idthuoc;
+    }
+
+    public void setIdthuoc(int idthuoc) {
+        this.idthuoc = idthuoc;
+    }
     public String getMaThuoc() {
-        return "Mã : "+ maThuoc;
+        return  maThuoc;
     }
 
     public void setMaThuoc(String maThuoc) {
@@ -28,7 +49,7 @@ public class MedicinesModel {
     }
 
     public String getTenThuoc() {
-        return "Tên : "+ tenThuoc;
+        return  tenThuoc;
     }
 
 
@@ -37,7 +58,7 @@ public class MedicinesModel {
     }
 
     public String getDonGia() {
-        return "Giá : " + donGia +"VND";
+        return  donGia ;
     }
 
     public void setDonGia(String donGia) {
@@ -45,7 +66,7 @@ public class MedicinesModel {
     }
 
     public String getDonVi() {
-        return "Đơn vị : " +donVi;
+        return donVi;
     }
 
     public void setDonVi(String donVi) {

@@ -36,37 +36,49 @@
             android:text="@string/qlhd">
 
         </TextView>
+        <Button
+            android:id="@+id/btnReloadbill"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:background="@drawable/ic_baseline_refresh_24">
+
+        </Button>
 
 
 
 
     </LinearLayout>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8"
         android:layout_marginBottom="10dp"
-        android:gravity="top">
+        android:orientation="horizontal">
 
-        <EditText
+        <TextView
+            android:id="@+id/tvDatetime"
             android:background="@drawable/backgroudbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
             android:textSize="10pt"
-            android:textAlignment="center"
-            android:hint="Tìm Kiếm" />
+            android:hint="Chọn ngày" />
 
         <Button
-            android:id="@+id/btnseach"
+            android:id="@+id/btnseachbill"
             android:layout_marginBottom="5dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="@drawable/ic_baseline_search_24"
             android:layout_centerVertical="true"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 
@@ -79,7 +91,7 @@
         android:layout_weight="6">
 
         <ListView
-            android:id="@+id/lstThuoc"
+            android:id="@+id/lstTBill"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@android:color/transparent"
@@ -104,26 +116,17 @@
             android:layout_weight="1">
             <Button
                 android:background="@drawable/backgroudbtnadd"
-                android:id="@+id/btnadd"
+                android:id="@+id/btnaddbill"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"
                 android:text="@string/btnADD"
                 android:layout_weight="1"></Button>
-            <Button
-                android:layout_marginTop="5dp"
-                android:background="@drawable/backgroudbtnedit"
-                android:id="@+id/btnedit"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:text="@string/btnEDIT"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"></Button>
+
             <Button
                 android:layout_marginTop="5dp"
                 android:background="@drawable/backgroudbtndelete"
-                android:id="@+id/btndelete"
+                android:id="@+id/btndeletebill"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textColor="@color/white"

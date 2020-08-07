@@ -12,27 +12,30 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.LongSparseArray;
 
 import com.tdc.quanlythuoctay.Adapter.PhamarAdapter;
+import com.tdc.quanlythuoctay.Database.DatabaseHandler;
 import com.tdc.quanlythuoctay.R;
+import com.tdc.quanlythuoctay.model.MedicinesModel;
 import com.tdc.quanlythuoctay.model.PharmaModel;
 
 import java.util.ArrayList;
 
-public class lstPharmacy extends MainActivity {
+public class lstPharmacy extends AppCompatActivity {
     private ListView lstNT;
     private Button btnBack,btnadd,btnedit,btndelete;
     private ImageButton btnMap;
-    ArrayList<PharmaModel> dataList = new ArrayList<>();
+    ArrayList<PharmaModel> dataList;
     PhamarAdapter adapter = null;
+    DatabaseHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lst_pharmacy);
         //1. khai bao thong tin
-
-
+        db = new DatabaseHandler(lstPharmacy.this);
         //2. setAdapter listview
         lstNT = (ListView) findViewById(R.id.lstNT);
         btnBack = (Button) findViewById(R.id.btnBack);
@@ -40,24 +43,15 @@ public class lstPharmacy extends MainActivity {
         btnedit = (Button) findViewById(R.id.btnedit);
         btndelete = (Button) findViewById(R.id.btndelete );
         btnMap = (ImageButton) findViewById(R.id.btnMap);
-        adapter = new PhamarAdapter(this, R.layout.lsttennt, dataList);
-        lstNT.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        lstNT.setAdapter(adapter);
-
         //3. xu ly thong tin
-
-        for(int i = 1 ; i <= 10 ; i++)
+        dataList = new ArrayList<>();
+        if(db.getAllPharma() != null)
         {
-            PharmaModel pharma = new PharmaModel();
-            pharma.setMaNT(String.valueOf(i));
-            pharma.setTenNT("Nhà thuốc An Khang-" + i);
-            pharma.setDiaChi(" 53 Võ Văn Ngân "+i);
-            //4. đưa danh sách
-            dataList.add(pharma);
+            dataList = db.getAllPharma();
         }
-
-        adapter.notifyDataSetChanged();// chu y
-
+        adapter = new PhamarAdapter(this, R.layout.lsttennt, dataList);
+        lstNT.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         setEvent();
 
 
@@ -149,6 +143,8 @@ public class lstPharmacy extends MainActivity {
                             pharma.setMaNT(edtmaNT.getText().toString());
                             pharma.setTenNT(edtTenNT.getText().toString());
                             pharma.setDiaChi(edtDiaChi.getText().toString());
+                            pharma.setIdnt(dataList.get(finalRow).getIdnt());
+                            db.updatePharma(pharma);
                             dataList.set(finalRow,pharma);
                             adapter.notifyDataSetChanged();
                             Toast.makeText(lstPharmacy.this,"Sửa Thành Công !",Toast.LENGTH_LONG).show();
@@ -206,6 +202,7 @@ public class lstPharmacy extends MainActivity {
                         pharma.setMaNT(edtmaNT.getText().toString());
                         pharma.setTenNT(edtTenNT.getText().toString());
                         pharma.setDiaChi(edtDiaChi.getText().toString());
+                        db.addPharma(pharma);
                         dataList.add(pharma);
                         adapter.notifyDataSetChanged();
                         Toast.makeText(lstPharmacy.this,"Thêm Thành Công !",Toast.LENGTH_LONG).show();
@@ -234,6 +231,7 @@ public class lstPharmacy extends MainActivity {
         {
             if (dataList.get(i).isChon())
             {
+                db.deletePharma(dataList.get(i).getIdnt());
                 dataList.remove(i);
             }
         }
