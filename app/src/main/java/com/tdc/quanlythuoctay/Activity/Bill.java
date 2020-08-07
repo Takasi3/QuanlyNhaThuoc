@@ -2,22 +2,30 @@ package com.tdc.quanlythuoctay.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tdc.quanlythuoctay.Adapter.BillAdapter;
 import com.tdc.quanlythuoctay.Adapter.MedicineAdapter;
 import com.tdc.quanlythuoctay.Adapter.PhamarAdapter;
+import com.tdc.quanlythuoctay.Adapter.SpinerMecineAdapter;
+import com.tdc.quanlythuoctay.Adapter.SpinerPharmaAdapter;
 import com.tdc.quanlythuoctay.Database.DatabaseHandler;
 import com.tdc.quanlythuoctay.R;
 import com.tdc.quanlythuoctay.model.BillModel;
+import com.tdc.quanlythuoctay.model.MedicinesModel;
 import com.tdc.quanlythuoctay.model.PharmaModel;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
@@ -30,7 +38,11 @@ private Button btnBack,btnaddbill,btndeletebill,btnseach,btnReload;
 private TextView tvDatetime,edtngaylap;
 private ListView lstTBill;
 private DatePickerDialog dpd;
+private SpinerPharmaAdapter spinerPharmaAdapter;
+private SpinerMecineAdapter spinerMecineAdapter;
     ArrayList<BillModel> dataList;
+    ArrayList<PharmaModel> dataPhamar;
+    ArrayList<MedicinesModel> dataMedicines;
     BillAdapter adapter = null;
     DatabaseHandler db;
     @Override
@@ -46,7 +58,7 @@ private DatePickerDialog dpd;
         tvDatetime=(TextView)findViewById(R.id.tvDatetime);
         lstTBill = (ListView) findViewById(R.id.lstTBill);
         dataList = new ArrayList<>();
-        if(db.getAllPharma() != null)
+        if(db.getAllBill() != null)
         {
             dataList = db.getAllBill();
         }
@@ -128,6 +140,123 @@ private DatePickerDialog dpd;
                 });
                 dpd.show(getSupportFragmentManager(),"Timepickerdialog");
 
+            }
+        });
+        btnaddbill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater li = LayoutInflater.from(Bill.this);
+                View promptsView = li.inflate(R.layout.popupbill, null);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        Bill.this);
+                alertDialogBuilder.setView(promptsView);
+
+
+                final EditText edtmabill = (EditText) promptsView
+                        .findViewById(R.id.edtmabill);
+                edtngaylap = (TextView) promptsView
+                        .findViewById(R.id.edtngaylap);
+               final TextView tvdonGia = (TextView) promptsView
+                        .findViewById(R.id.tvdonGia);
+                final Spinner spinPharma = (Spinner) promptsView
+                        .findViewById(R.id.spinPharma);
+                final Spinner spinMedical = (Spinner) promptsView
+                        .findViewById(R.id.spinMedical);
+                final Button btnADD = (Button) promptsView
+                        .findViewById(R.id.btnpopupaddbill);
+                final Button btnCancel = (Button) promptsView
+                        .findViewById(R.id.btnpopupcancelbill);
+                dataPhamar = new ArrayList<>();
+                dataPhamar = db.getAllPharma();
+                PharmaModel[] pharmaArr = new PharmaModel[dataPhamar.size()];
+                pharmaArr = dataPhamar.toArray(pharmaArr);
+                spinerPharmaAdapter = new SpinerPharmaAdapter(Bill.this,android.R.layout.simple_spinner_item,pharmaArr);
+                spinPharma.setAdapter(spinerPharmaAdapter);
+
+                dataMedicines = new ArrayList<>();
+                dataMedicines = db.getAllMedicine();
+                MedicinesModel[] MedicineArr = new MedicinesModel[dataMedicines.size()];
+                MedicineArr = dataMedicines.toArray(MedicineArr);
+                spinerMecineAdapter = new SpinerMecineAdapter(Bill.this,android.R.layout.simple_spinner_item,MedicineArr);
+                spinMedical.setAdapter(spinerMecineAdapter);
+
+                spinMedical.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view,
+                                               int position, long id) {
+                        // Here you get the current item (a User object) that is selected by its position
+                        MedicinesModel medicinesModel = spinerMecineAdapter.getItem(position);
+                        tvdonGia.setText(medicinesModel.getDonGia());
+                        // Here you can do the action you want to...
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapter) {  }
+                });
+
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialogBuilder
+                        .setCancelable(false);
+
+                btnADD.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        BillModel billModel = new BillModel();
+                        billModel.setMaBill(edtmabill.getText().toString().trim());
+                        billModel.setNgayLap(edtngaylap.getText().toString().trim());
+                        billModel.setNhaThuoc(spinPharma.getSelectedItem().toString());
+                        billModel.setBillContent(spinMedical.getSelectedItem().toString());
+                        billModel.setBillPrice(tvdonGia.getText().toString().trim());
+                        db.addBill(billModel);
+                        dataList.add(billModel);
+                        adapter.notifyDataSetChanged();
+                        Toast.makeText(Bill.this,"Thêm Thành Công !",Toast.LENGTH_LONG).show();
+                        alertDialog.cancel();
+                    }
+                });
+
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.cancel();
+                    }
+                });
+                edtngaylap.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Calendar now = Calendar.getInstance();
+                        now.add(Calendar.DATE,7);
+                        if (dpd == null) {
+                            dpd = DatePickerDialog.newInstance(
+                                    Bill.this,
+                                    now.get(Calendar.YEAR),
+                                    now.get(Calendar.MONTH),
+                                    now.get(Calendar.DAY_OF_MONTH)
+                            );
+                        } else {
+                            dpd.initialize(
+                                    Bill.this,
+                                    now.get(Calendar.YEAR),
+                                    now.get(Calendar.MONTH),
+                                    now.get(Calendar.DAY_OF_MONTH)
+                            );
+                        }
+
+                        dpd.setVersion(DatePickerDialog.Version.VERSION_2);
+                        dpd.setTitle("Chọn Ngày");
+                        dpd.setScrollOrientation(DatePickerDialog.ScrollOrientation.VERTICAL);
+                        dpd.setOnCancelListener(dialog -> {
+                            Log.d("DatePickerDialog", "Dialog was cancelled");
+                            dpd = null;
+                        });
+                        dpd.show(getSupportFragmentManager(),"Timepickerdialog");
+
+                    }
+                });
+                alertDialog.setCanceledOnTouchOutside(false);
+
+                // show it
+                alertDialog.show();
             }
         });
     }

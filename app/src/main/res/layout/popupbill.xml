@@ -30,7 +30,7 @@
             android:id="@+id/edtmabill"
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:hint="Nhập Mã Thuốc"
+            android:hint="Nhập Mã Bill"
             android:layout_height="wrap_content" >
             <requestFocus />
         </EditText>

@@ -127,7 +127,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 String maBill = cursor.getString(1);
                 String ngayLap = cursor.getString(2);
                 String nhathuoc = cursor.getString(3);
-                String billcontent = cursor.getString(3);
+                String billcontent = cursor.getString(4);
                 String donGia = cursor.getString(5);
                 datalist.add(new BillModel(id,maBill,ngayLap,nhathuoc,billcontent,donGia));
                 // Đến dòng tiếp theo
@@ -145,7 +145,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         ArrayList<BillModel> datalist = new ArrayList<BillModel>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_BILL, null, KEY_TENTHUOC + " LIKE ? ", new String[] {"%"+ strSearch+ "%" },null, null, null);
+        Cursor cursor = db.query(TABLE_BILL, null, KEY_NGAYLAP + " LIKE ? ", new String[] {"%"+ strSearch+ "%" },null, null, null);
         if( cursor != null && cursor.moveToFirst()){
             while (!cursor.isAfterLast()) {
                 int id = cursor.getInt(0);
@@ -286,7 +286,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         }
 
     }
-
 
     public AccoutModel getUser(String username) {
         SQLiteDatabase db = this.getReadableDatabase();

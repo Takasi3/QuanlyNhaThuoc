@@ -9,6 +9,10 @@ public class BillModel {
     private String BillPrice;
     private boolean chon;
 
+    public BillModel() {
+
+    }
+
     public boolean isChon() {
         return chon;
     }
