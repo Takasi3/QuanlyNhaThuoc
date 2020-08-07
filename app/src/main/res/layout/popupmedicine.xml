@@ -74,6 +74,7 @@
             android:id="@+id/edtdonGia"
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:inputType="numberDecimal"
             android:hint="Nhập Đơn Giá"
             android:layout_height="wrap_content" >
             <requestFocus />
